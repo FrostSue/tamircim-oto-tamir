@@ -3,341 +3,274 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tamircim Oto Tamir & Rot Balans | Suşehri Sivas Oto Servis</title>
-  <meta name="description" content="Suşehri Küçük Sanayi Sitesi'nde motor mekanik, periyodik bakım, lazerli rot balans ve acil oto tamir hizmetleri. Hamdi Usta ve uzman kadrosu.">
-  <meta name="keywords" content="Tamircim Oto Tamir, Suşehri Oto Tamir, Suşehri Rot Balans, Hamdi Usta, Sivas Oto Servis, Suşehri Sanayi">
-  
-  <meta property="og:title" content="Tamircim Oto Tamir & Rot Balans - Suşehri Sivas">
-  <meta property="og:description" content="Suşehri Küçük Sanayi Sitesi'nde güvenilir oto bakım, motor mekanik ve lazerli rot balans servisi.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://frostsue.github.io/tamircim-oto-tamir/">
-  <meta property="og:image" content="https://iili.io/ofBOifp.jpg">
+  <title>Tamircim Oto Tamir ve Rot Balans | Suşehri Sivas</title>
+  <meta name="description" content="Tamircim Oto Tamir ve Lazerli Rot Balans Servisi. Suşehri Küçük Sanayi Sitesi F Blok No: 17. Hamdi Usta: 0538 660 41 51.">
 
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "AutoRepair",
-    "name": "Tamircim Oto Tamir",
-    "alternateName": "Tamircim Oto Tamir & Rot Balans",
-    "image": "https://iili.io/ofBOifp.jpg",
-    "telephone": "+905386604151",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Küçük Sanayi Sitesi F Blok No: 17",
-      "addressLocality": "Suşehri",
-      "addressRegion": "Sivas",
-      "postalCode": "58600",
-      "addressCountry": "TR"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 40.1654876,
-      "longitude": 38.0776518
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        "opens": "08:00",
-        "closes": "19:00"
-      }
-    ],
-    "url": "https://frostsue.github.io/tamircim-oto-tamir/"
-  }
-  </script>
+  
+  <!-- Leaflet Map CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <style>
-    body { font-family: 'Inter', sans-serif; }
+    #map { height: 380px; width: 100%; border-radius: 0.75rem; z-index: 10; }
   </style>
 </head>
-<body class="bg-slate-900 text-slate-100 antialiased selection:bg-amber-500 selection:text-slate-950">
+<body class="bg-gray-100 text-gray-800 antialiased font-sans">
 
-  <!-- Header -->
-  <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur border-b border-slate-800">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+  <!-- Üst Bilgi Barı -->
+  <div class="bg-slate-900 text-gray-300 text-xs sm:text-sm py-2 px-4 border-b border-slate-800">
+    <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-2">
+      <div class="flex items-center space-x-4">
+        <span><i class="fa-solid fa-location-dot text-red-500 mr-1.5"></i>Suşehri Küçük Sanayi Sitesi F Blok No: 17</span>
+        <span class="hidden md:inline"><i class="fa-solid fa-clock text-blue-400 mr-1.5"></i>Pzt - Cmt: 08:00 - 19:00</span>
+      </div>
       <div class="flex items-center space-x-3">
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center text-slate-950 font-black text-2xl shadow-lg shadow-amber-500/20">
-          <i class="fa-solid fa-wrench"></i>
-        </div>
-        <div>
-          <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-white block">TAMİRCİM <span class="text-amber-400 text-base font-semibold block sm:inline">OTO TAMİR & ROT BALANS</span></span>
-        </div>
+        <a href="tel:05386604151" class="text-white font-bold hover:text-red-400 transition">
+          <i class="fa-solid fa-phone text-red-500 mr-1"></i>0538 660 41 51
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ana Header -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div>
+        <a href="#" class="block">
+          <span class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">TAMİRCİM</span>
+          <span class="block text-xs sm:text-sm font-bold text-red-600 tracking-wider uppercase">Oto Tamir & Lazerli Rot Balans</span>
+        </a>
       </div>
 
-      <div class="flex items-center space-x-3">
-        <a href="tel:05386604151" class="hidden sm:inline-flex items-center space-x-2 text-slate-300 hover:text-white font-medium text-sm">
-          <i class="fa-solid fa-phone text-amber-400"></i>
-          <span>0538 660 41 51</span>
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <a href="https://wa.me/905386604151" target="_blank" class="inline-flex items-center space-x-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs sm:text-sm px-3.5 py-2.5 rounded-lg transition shadow-sm">
+          <i class="fa-brands fa-whatsapp text-base"></i>
+          <span class="hidden sm:inline">WhatsApp</span>
         </a>
-        <a href="tel:05386604151" class="inline-flex items-center space-x-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2.5 rounded-lg text-sm transition shadow-lg shadow-amber-500/25">
-          <i class="fa-solid fa-phone-volume"></i>
+        <a href="tel:05386604151" class="inline-flex items-center space-x-1.5 bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm px-4 py-2.5 rounded-lg transition shadow-sm">
+          <i class="fa-solid fa-phone"></i>
           <span>Hemen Ara</span>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="relative pt-12 pb-20 overflow-hidden">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <div class="lg:col-span-7 space-y-6">
-          <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold uppercase tracking-wider">
-            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-            <span>Suşehri Sanayi Sitesi &middot; Hamdi Usta</span>
+  <!-- Dükkan Tanıtım ve Ana Alan -->
+  <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+
+    <!-- Ana Başlık Kartı -->
+    <div class="bg-white rounded-xl border border-gray-200 p-6 sm:p-8 shadow-sm">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7 space-y-4">
+          <div class="inline-block bg-red-50 text-red-700 text-xs font-bold px-3 py-1 rounded-md uppercase border border-red-200">
+            Suşehri Sanayi Sitesi &middot; Hamdi Usta
           </div>
-
-          <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
-            Aracınız İçin Güvenilir <br class="hidden sm:inline"/>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">Usta İşçiliği & Çözüm</span>
+          <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
+            Tamircim Oto Tamir ve Bakım Servisi
           </h1>
-
-          <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
-            Suşehri Küçük Sanayi Sitesi'nde motor mekanik, periyodik bakım, lazerli rot balans ve oto arıza onarımında yılların tecrübesiyle hizmetinizdeyiz. Yolda kalan misafirlerimize hızlı müdahale ve güvenilir esnaflık.
+          <p class="text-gray-600 text-base leading-relaxed">
+            Sivas Suşehri Küçük Sanayi Sitesi'nde motor mekanik, periyodik bakım, fren-ön takım onarımı ve bilgisayarlı lazerli rot balans ayarı hizmeti veriyoruz. Hem yerel müşterilerimize hem de D-100 karayolunda yolda kalan sürücülere garantili ve dürüst esnaflık anlayışıyla yardımcı oluyoruz.
           </p>
 
-          <div class="flex flex-wrap gap-4 pt-2">
-            <a href="tel:05386604151" class="inline-flex items-center space-x-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl text-base transition shadow-xl shadow-amber-500/25">
-              <i class="fa-solid fa-phone"></i>
-              <span>0538 660 41 51</span>
+          <div class="flex flex-wrap gap-3 pt-2">
+            <a href="tel:05386604151" class="inline-flex items-center space-x-2 bg-slate-900 hover:bg-slate-800 text-white font-bold px-5 py-3 rounded-lg text-sm transition">
+              <i class="fa-solid fa-phone text-red-400"></i>
+              <span>Hamdi Usta: 0538 660 41 51</span>
             </a>
-            <a href="https://wa.me/905386604151?text=Merhaba%20Hamdi%20Usta,%20arac%C4%B1mla%20ilgili%20bilgi%20almak%20istiyorum." target="_blank" class="inline-flex items-center space-x-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-3.5 rounded-xl text-base transition shadow-xl shadow-emerald-600/25">
-              <i class="fa-brands fa-whatsapp text-lg"></i>
-              <span>WhatsApp</span>
+            <a href="https://maps.app.goo.gl/8MkDATQrkK8QHf566" target="_blank" class="inline-flex items-center space-x-2 bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold px-5 py-3 rounded-lg text-sm border border-blue-200 transition">
+              <i class="fa-solid fa-location-arrow"></i>
+              <span>Google Haritalarda Aç</span>
             </a>
-            <a href="https://maps.app.goo.gl/8MkDATQrkK8QHf566" target="_blank" class="inline-flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold px-5 py-3.5 rounded-xl text-base border border-slate-700 transition">
-              <i class="fa-solid fa-location-dot text-amber-400"></i>
-              <span>Yol Tarifi</span>
-            </a>
-          </div>
-
-          <div class="pt-4 grid grid-cols-3 gap-4 border-t border-slate-800 text-center">
-            <div>
-              <div class="text-2xl font-black text-white">4.8 / 5.0</div>
-              <div class="text-xs text-slate-400 font-medium mt-0.5">Google Puanı</div>
-            </div>
-            <div>
-              <div class="text-2xl font-black text-amber-400">20+ Yıl</div>
-              <div class="text-xs text-slate-400 font-medium mt-0.5">Usta Tecrübesi</div>
-            </div>
-            <div>
-              <div class="text-2xl font-black text-white">Lazerli</div>
-              <div class="text-xs text-slate-400 font-medium mt-0.5">Rot Balans Cihazı</div>
-            </div>
           </div>
         </div>
 
         <div class="lg:col-span-5">
-          <div class="relative group rounded-2xl overflow-hidden border border-slate-700 shadow-2xl bg-slate-800">
-            <img src="https://iili.io/ofBOifp.jpg" alt="Tamircim Oto Tamir Dükkan Cephesi ve Tabelası" class="w-full h-80 sm:h-96 object-cover object-center group-hover:scale-105 transition duration-500">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-            <div class="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-slate-900/80 backdrop-blur border border-slate-700/60">
-              <span class="text-xs font-semibold uppercase text-amber-400 block">Dükkanımız</span>
-              <span class="text-sm font-bold text-white block mt-0.5">Küçük Sanayi Sitesi F Blok No: 17, Suşehri / Sivas</span>
+          <div class="rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+            <img src="https://iili.io/ofBOifp.jpg" alt="Tamircim Oto Tamir Dükkan Cephesi ve Tabelası" class="w-full h-64 sm:h-72 object-cover object-center">
+            <div class="p-3 bg-gray-50 border-t border-gray-200 text-xs text-gray-500 font-medium text-center">
+              Dükkan Girişi & Tabela &middot; Suşehri Sanayi F Blok No: 17
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Hizmetlerimiz -->
-  <section class="py-16 bg-slate-950/60 border-y border-slate-800">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Verdiğimiz Hizmetler</h2>
-        <p class="text-slate-400 text-sm sm:text-base mt-2">Binek ve ticari araçlarınız için kapsamlı bakım ve profesyonel mekanik çözümler.</p>
-      </div>
+    <!-- Hizmetler -->
+    <div class="bg-white rounded-xl border border-gray-200 p-6 sm:p-8 shadow-sm">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mb-6 pb-3 border-b border-gray-100">
+        <i class="fa-solid fa-gears text-red-600 mr-2"></i>Hizmetlerimiz
+      </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-amber-500/50 transition">
-          <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4">
-            <i class="fa-solid fa-car-burst"></i>
+        <div class="border border-gray-200 rounded-lg p-5 bg-gray-50/50">
+          <div class="text-slate-900 font-bold text-base mb-1.5 flex items-center">
+            <i class="fa-solid fa-wrench text-red-600 mr-2"></i>Motor ve Mekanik Tamir
           </div>
-          <h3 class="text-lg font-bold text-white mb-2">Motor & Mekanik Onarım</h3>
-          <p class="text-slate-300 text-sm leading-relaxed">Motor arıza tespiti, rektifiye, triger, debriyaj, şanzıman ve motor revizyon işlemlerinde garantili usta işçiliği.</p>
+          <p class="text-gray-600 text-sm">
+            Motor arıza tespiti, motor rektifiye, triger kayışı/zinciri değişimi, conta ve silindir kapağı onarımı.
+          </p>
         </div>
 
-        <div class="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-amber-500/50 transition">
-          <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4">
-            <i class="fa-solid fa-arrows-to-circle"></i>
+        <div class="border border-gray-200 rounded-lg p-5 bg-gray-50/50">
+          <div class="text-slate-900 font-bold text-base mb-1.5 flex items-center">
+            <i class="fa-solid fa-bullseye text-red-600 mr-2"></i>Lazerli Rot Balans
           </div>
-          <h3 class="text-lg font-bold text-white mb-2">Lazerli Rot Balans</h3>
-          <p class="text-slate-300 text-sm leading-relaxed">Yeni nesil lazerli bilgisayarlı rot balans cihazımız ile direksiyon titremesi ve çekme sorunlarına kesin ve milimetrik ayar.</p>
+          <p class="text-gray-600 text-sm">
+            Son teknoloji lazerli cihazla bilgisayarlı ön düzen, rot ayarı ve yüksek hızlarda direksiyon titremesini gideren balans ayarı.
+          </p>
         </div>
 
-        <div class="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-amber-500/50 transition">
-          <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4">
-            <i class="fa-solid fa-oil-can"></i>
+        <div class="border border-gray-200 rounded-lg p-5 bg-gray-50/50">
+          <div class="text-slate-900 font-bold text-base mb-1.5 flex items-center">
+            <i class="fa-solid fa-oil-can text-red-600 mr-2"></i>Periyodik Bakım
           </div>
-          <h3 class="text-lg font-bold text-white mb-2">Periyodik Sıvı & Filtre Bakımı</h3>
-          <p class="text-slate-300 text-sm leading-relaxed">Orijinal motor yağları, yağ, hava, polen, yakıt filtreleri değişimi ile motorunuzun ömrünü uzatan eksiksiz periyodik bakım.</p>
+          <p class="text-gray-600 text-sm">
+            Motor yağı, yağ filtresi, hava ve polen filtreleri, buji kontrolü ve kışlık/yazlık antifriz ölçümü.
+          </p>
         </div>
 
-        <div class="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-amber-500/50 transition">
-          <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4">
-            <i class="fa-solid fa-circle-dot"></i>
+        <div class="border border-gray-200 rounded-lg p-5 bg-gray-50/50">
+          <div class="text-slate-900 font-bold text-base mb-1.5 flex items-center">
+            <i class="fa-solid fa-shield text-red-600 mr-2"></i>Fren ve Alt Takım
           </div>
-          <h3 class="text-lg font-bold text-white mb-2">Fren & Ön Takım Servisi</h3>
-          <p class="text-slate-300 text-sm leading-relaxed">Fren balata ve disk değişimi, amortisör, salıncak, rot başı ve alt takım kontrolleriyle güvenli sürüş donanımı.</p>
+          <p class="text-gray-600 text-sm">
+            Fren balatası ve disk değişimi, amortisör, rot başı, salıncak ve z-rot yenileme, fren hidroliği bakımı.
+          </p>
         </div>
 
-        <div class="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-amber-500/50 transition">
-          <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4">
-            <i class="fa-solid fa-bolt"></i>
+        <div class="border border-gray-200 rounded-lg p-5 bg-gray-50/50">
+          <div class="text-slate-900 font-bold text-base mb-1.5 flex items-center">
+            <i class="fa-solid fa-car text-red-600 mr-2"></i>Debriyaj ve Şanzıman
           </div>
-          <h3 class="text-lg font-bold text-white mb-2">Akü & Genel Kontrol</h3>
-          <p class="text-slate-300 text-sm leading-relaxed">Akü ölçümü, şarj-marş dinamosu kontrolleri ve yola çıkacak araçlar için detaylı seyahat öncesi ekspertiz kontrolü.</p>
+          <p class="text-gray-600 text-sm">
+            Baskı balata değişimi, debriyaj teli/merkezi onarımı ve manuel şanzıman vites geçiş problemleri çözümü.
+          </p>
         </div>
 
-        <div class="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/60 hover:border-amber-500/50 transition">
-          <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4">
-            <i class="fa-solid fa-truck-pickup"></i>
+        <div class="border border-gray-200 rounded-lg p-5 bg-gray-50/50">
+          <div class="text-slate-900 font-bold text-base mb-1.5 flex items-center">
+            <i class="fa-solid fa-truck-pickup text-red-600 mr-2"></i>Acil Yol Desteği
           </div>
-          <h3 class="text-lg font-bold text-white mb-2">Acil Yol Destek & Danışma</h3>
-          <p class="text-slate-300 text-sm leading-relaxed">D-100 karayolu ve Suşehri güzergahında yolda kalan sürücülerimize telefonla teknik yönlendirme ve acil tamir desteği.</p>
+          <p class="text-gray-600 text-sm">
+            Suşehri çevresinde ve karayolunda kalan araçlar için telefonla teknik destek ve servis alanımıza güvenli çekilme desteği.
+          </p>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Müşteri Yorumları -->
-  <section class="py-16">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <div class="inline-flex items-center space-x-1 text-amber-400 mb-2 text-lg">
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Google Maps Müşteri Yorumlarımız</h2>
-        <p class="text-slate-400 text-sm sm:text-base mt-2">Dükkanımıza uğrayan sürücülerimizin tarafsız değerlendirmeleri.</p>
-      </div>
+    <!-- Dükkan Fotoğrafları Galerisi -->
+    <div class="bg-white rounded-xl border border-gray-200 p-6 sm:p-8 shadow-sm">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mb-6 pb-3 border-b border-gray-100">
+        <i class="fa-solid fa-images text-red-600 mr-2"></i>Servis Alanımız
+      </h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="p-6 rounded-2xl bg-slate-800 border border-slate-700 space-y-4">
-          <div class="flex text-amber-400 text-sm">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          </div>
-          <p class="text-slate-300 text-sm italic">
-            "Aracım yolda motor korumasına geçti. Hamdi abi ve arkadaşları aradık yönlendirmeleri ile servise kadar geldik ve hızlı çözümleri için çok teşekkür ediyorum."
-          </p>
-          <div class="pt-2 border-t border-slate-700/80 text-xs font-semibold text-white">
-            Sinan İlaslan &middot; <span class="text-slate-400 font-normal">Google Haritalar</span>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="rounded-lg overflow-hidden border border-gray-200">
+          <img src="https://iili.io/ofBOifp.jpg" alt="Tamircim Suşehri Dükkan Girişi" class="w-full h-64 object-cover">
+          <div class="p-3 bg-gray-50 text-xs text-gray-600 font-medium text-center">
+            Tamircim Oto Tamir & Lazerli Rot Balans Dükkan Girişi
           </div>
         </div>
 
-        <div class="p-6 rounded-2xl bg-slate-800 border border-slate-700 space-y-4">
-          <div class="flex text-amber-400 text-sm">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          </div>
-          <p class="text-slate-300 text-sm italic">
-            "Yolda aracı fulleyince benzin kaçtığını fark ettik ve aramada ilk çıkan usta Hamdi usta sağ olsun eline sağlık ilk günkü gibi oldu boruyu değiştirdi ve uygun fiyat aldılar teşekkürler."
-          </p>
-          <div class="pt-2 border-t border-slate-700/80 text-xs font-semibold text-white">
-            İlhan Köse &middot; <span class="text-slate-400 font-normal">Google Haritalar</span>
-          </div>
-        </div>
-
-        <div class="p-6 rounded-2xl bg-slate-800 border border-slate-700 space-y-4">
-          <div class="flex text-amber-400 text-sm">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          </div>
-          <p class="text-slate-300 text-sm italic">
-            "Çok hızlı ve dikkatli çalıştılar, sorunsuz bir şekilde ayrıldık kendilerine çok teşekkür ediyorum. Güvenilir sanayi esnafı."
-          </p>
-          <div class="pt-2 border-t border-slate-700/80 text-xs font-semibold text-white">
-            Ali Eren Sönmez &middot; <span class="text-slate-400 font-normal">Google Haritalar</span>
+        <div class="rounded-lg overflow-hidden border border-gray-200">
+          <img src="https://iili.io/ofBOLgI.jpg" alt="Oto Tamircim Tamir Bakım Onarım Atölyesi" class="w-full h-64 object-cover">
+          <div class="p-3 bg-gray-50 text-xs text-gray-600 font-medium text-center">
+            Atölye ve Çalışma Alanı Cephesi
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- İletişim ve Konum -->
-  <section class="py-16 bg-slate-950 border-t border-slate-800">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        <div class="lg:col-span-6 space-y-6">
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-white">İletişim & Konum Bilgileri</h2>
-          <p class="text-slate-400 text-sm">Dükkanımıza gelmeden önce arayabilir, aracınızın durumunu danışabilirsiniz. Çayımız her zaman hazır!</p>
+    <!-- Konum ve Çalışan Canlı Harita -->
+    <div class="bg-white rounded-xl border border-gray-200 p-6 sm:p-8 shadow-sm">
+      <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mb-4 pb-3 border-b border-gray-100">
+        <i class="fa-solid fa-map-location-dot text-red-600 mr-2"></i>Konum ve Yol Tarifi
+      </h2>
 
-          <div class="space-y-4">
-            <div class="flex items-start space-x-4">
-              <div class="w-10 h-10 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0 mt-1">
-                <i class="fa-solid fa-location-dot"></i>
-              </div>
-              <div>
-                <span class="text-xs uppercase font-semibold text-slate-400 block">Adres</span>
-                <span class="text-slate-200 text-sm font-medium">Küçük Sanayi Sitesi F Blok No: 17, 58600 Suşehri / Sivas</span>
-              </div>
-            </div>
-
-            <div class="flex items-start space-x-4">
-              <div class="w-10 h-10 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0 mt-1">
-                <i class="fa-solid fa-phone"></i>
-              </div>
-              <div>
-                <span class="text-xs uppercase font-semibold text-slate-400 block">Telefon</span>
-                <a href="tel:05386604151" class="text-amber-400 hover:underline text-base font-bold">0538 660 41 51</a>
-              </div>
-            </div>
-
-            <div class="flex items-start space-x-4">
-              <div class="w-10 h-10 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0 mt-1">
-                <i class="fa-solid fa-clock"></i>
-              </div>
-              <div>
-                <span class="text-xs uppercase font-semibold text-slate-400 block">Çalışma Saatleri</span>
-                <span class="text-slate-200 text-sm font-medium">Pazartesi - Cumartesi: 08:00 - 19:00 (Pazar: Acil Durumlar)</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="pt-4 flex flex-wrap gap-4">
-            <a href="https://maps.app.goo.gl/8MkDATQrkK8QHf566" target="_blank" class="inline-flex items-center space-x-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-3 rounded-xl text-sm transition">
-              <i class="fa-solid fa-map-location-dot"></i>
-              <span>Google Haritalarda Aç</span>
-            </a>
-            <a href="tel:05386604151" class="inline-flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 text-white font-bold px-6 py-3 rounded-xl text-sm border border-slate-700 transition">
-              <i class="fa-solid fa-phone"></i>
-              <span>Ustayı Ara</span>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Harita -->
+        <div class="lg:col-span-7">
+          <div id="map" class="shadow-inner border border-gray-300"></div>
+          <div class="mt-2 text-xs text-gray-500 flex justify-between items-center">
+            <span>Haritayı yakınlaştırıp uzaklaştırabilirsiniz.</span>
+            <a href="https://maps.app.goo.gl/8MkDATQrkK8QHf566" target="_blank" class="text-blue-600 hover:underline font-semibold">
+              Büyük Haritada Aç &rarr;
             </a>
           </div>
         </div>
 
-        <div class="lg:col-span-6">
-          <div class="rounded-2xl overflow-hidden border border-slate-700 shadow-xl h-80 bg-slate-800">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3032.5516086786846!2d38.0776518!3d40.1654876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x406e2e50c4068565%3A0xa1f2275b9f71c356!2s%C3%96nen%20Karde%C5%9Fler!5e0!3m2!1str!2str!4v1700000000000!5m2!1str!2str" 
-              width="100%" 
-              height="100%" 
-              style="border:0;" 
-              allowfullscreen="" 
-              loading="lazy" 
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+        <!-- İletişim Detayları -->
+        <div class="lg:col-span-5 space-y-5 bg-gray-50 p-6 rounded-xl border border-gray-200">
+          <div>
+            <span class="text-xs uppercase font-bold text-gray-500 block mb-1">Dükkan Adresi</span>
+            <p class="text-sm font-semibold text-slate-900">
+              Küçük Sanayi Sitesi F Blok No: 17<br>
+              58600 Suşehri / Sivas
+            </p>
+          </div>
+
+          <div>
+            <span class="text-xs uppercase font-bold text-gray-500 block mb-1">Telefon / İletişim</span>
+            <p class="text-base font-extrabold text-slate-900">
+              <a href="tel:05386604151" class="text-red-600 hover:underline">0538 660 41 51</a>
+            </p>
+            <span class="text-xs text-gray-500">Hamdi Usta & Mustafa</span>
+          </div>
+
+          <div>
+            <span class="text-xs uppercase font-bold text-gray-500 block mb-1">Çalışma Saatleri</span>
+            <p class="text-sm text-gray-700">
+              Pazartesi - Cumartesi: 08:00 - 19:00<br>
+              <span class="text-xs text-gray-500">Pazar günleri acil durumlar için telefonla ulaşabilirsiniz.</span>
+            </p>
+          </div>
+
+          <div class="pt-2 flex flex-col gap-2">
+            <a href="https://maps.app.goo.gl/8MkDATQrkK8QHf566" target="_blank" class="w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg text-sm transition shadow-sm">
+              <i class="fa-solid fa-diamond-turn-right mr-1.5"></i>Google Haritalarda Yol Tarifi Al
+            </a>
+            <a href="tel:05386604151" class="w-full text-center bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-lg text-sm transition">
+              <i class="fa-solid fa-phone mr-1.5"></i>Doğrudan Ustayı Ara
+            </a>
           </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="py-8 bg-slate-950 border-t border-slate-800/80 text-center text-slate-500 text-xs">
+  </main>
+
+  <!-- Basit Footer -->
+  <footer class="bg-slate-900 text-gray-400 py-6 text-center text-xs mt-12 border-t border-slate-800">
     <div class="max-w-6xl mx-auto px-4">
-      <p>&copy; 2026 Tamircim Oto Tamir & Rot Balans - Hamdi Usta. Suşehri / Sivas. Tüm hakları saklıdır.</p>
-      <p class="mt-1">Resmi İşletme Tanıtım ve İletişim Portalı</p>
+      <p class="font-semibold text-gray-300">Tamircim Oto Tamir & Rot Balans - Hamdi Usta</p>
+      <p class="mt-1">Küçük Sanayi Sitesi F Blok No: 17, Suşehri / Sivas</p>
+      <p class="mt-2 text-gray-500">&copy; 2026 Tamircim Oto Tamir. Tüm hakları saklıdır.</p>
     </div>
   </footer>
+
+  <!-- Leaflet Harita Başlatıcı Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Suşehri Küçük Sanayi Sitesi F Blok Koordinatları
+      var lat = 40.165488;
+      var lng = 38.077652;
+
+      var map = L.map('map').setView([lat, lng], 16);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap'
+      }).addTo(map);
+
+      var marker = L.marker([lat, lng]).addTo(map);
+      marker.bindPopup("<b>Tamircim Oto Tamir</b><br>F Blok No: 17, Suşehri Sanayi").openPopup();
+    });
+  </script>
 
 </body>
 </html>
