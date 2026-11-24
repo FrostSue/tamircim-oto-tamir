@@ -256,11 +256,11 @@
   <!-- Leaflet Harita Başlatıcı Script -->
   <script>
     document.addEventListener("DOMContentLoaded", function() {
-      // Suşehri Küçük Sanayi Sitesi F Blok Koordinatları
-      var lat = 40.165488;
-      var lng = 38.077652;
+      // Suşehri Küçük Sanayi Sitesi F Blok No: 17 Resmi Koordinatları
+      var lat = 40.1800868;
+      var lng = 38.0783007;
 
-      var map = L.map('map').setView([lat, lng], 16);
+      var map = L.map('map').setView([lat, lng], 17);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
@@ -268,7 +268,7 @@
       }).addTo(map);
 
       var marker = L.marker([lat, lng]).addTo(map);
-      marker.bindPopup("<b>Tamircim Oto Tamir</b><br>F Blok No: 17, Suşehri Sanayi").openPopup();
+      marker.bindPopup("<b>Tamircim Oto Tamir</b><br>Küçük Sanayi Sitesi F Blok No: 17<br><a href='https://maps.app.goo.gl/8MkDATQrkK8QHf566' target='_blank' style='color:#dc2626;font-weight:bold;'>Google Haritalarda Aç</a>").openPopup();
     });
   </script>
 
